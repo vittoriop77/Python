@@ -98,7 +98,6 @@ rialzisti = [entry for entry in losers if is_above_sma200(entry['ticker'])]
 print(rialzisti)
 
 def filter_by_atr(tickers, atr_threshold=0.03):
-
     # Se input lista di dizionari, estrai solo ticker
     if isinstance(tickers[0], dict):
         ticker_list = [t['ticker'] for t in tickers if 'ticker' in t]
@@ -137,10 +136,13 @@ def filter_by_atr(tickers, atr_threshold=0.03):
 
     return filtered_tickers, atr_values
 
-print("=== STEP 3: Ricerca dei ticker con volatilità > 0.03  ===")
-lista_finale, atrs = filter_by_atr(rialzisti, atr_threshold=0.03)
-#lista_finale = filter_by_atr(rialzisti, atr_threshold=0.03)
-print(lista_finale)
+if not rialzisti:
+    print("La lista era vuota non c'è nulla da fare")
+else:
+    print("=== STEP 3: Ricerca dei ticker con volatilità > 0.03  ===")
+    lista_finale, atrs = filter_by_atr(rialzisti, atr_threshold=0.03)
+    #lista_finale = filter_by_atr(rialzisti, atr_threshold=0.03)
+    print(lista_finale)
 
 def calculate_support_levels(lista_finale, atrs):
     """
